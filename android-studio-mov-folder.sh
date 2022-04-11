@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # renames folder in the list
 
 mv_bg_files(){

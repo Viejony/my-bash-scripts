@@ -1,4 +1,5 @@
 #!/bin/bash
+
 # This script send last n photos to jhony's PC.
 
 user='jhony'

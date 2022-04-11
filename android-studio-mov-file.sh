@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # This script should be executed in "<android_project>/app/src" folder
 # Creates folders and moves a file to the crated folder
 
