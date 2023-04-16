@@ -1,14 +1,22 @@
 #!/bin/bash
 
-files=$(ls | grep ".mp4")
-folder="converted"
+# Parameters
+inputFormat="mkv"
+outputFormat="mp4"
+outputFolder="converted"
 
-# Creates a folder
-mkdir $folder
+# Get files in current foldwr
+files=()
+while IFS= read -r -d '' file; do
+  files+=("$file")
+done < <(find . -type f -name "*.$inputFormat" -print0)
 
-# Itereates over mp4 files
-for t in ${files[@]}; do
-    ffmpeg -i $t -c:v libx265 -crf 26 -preset medium -c:a aac -b:a 128k $folder/$t
-    # Example with Nvidia GPU
-    # ffmpeg -y -vsync 0 -hwaccel cuda -hwaccel_output_format cuda -i $t -c:a copy -c:v av1_nvenc -b:v 5M $folder/$t
+# Creates a folder with defined name
+mkdir $outputFolder
+
+# Itereates over files array and call ffmpeg converter tool in every iteration
+for file in "${files[@]}"
+do
+  #echo "$file"
+  ffmpeg -y -vsync 0 -hwaccel cuda -hwaccel_output_format cuda -i "$file" -c:a copy -b:a 128k -c:v av1_nvenc -b:v 5M "$outputFolder${file%.inputFormat}.$outputFormat"
 done
