@@ -1,10 +1,12 @@
 #!/bin/bash
 
-# renames folder in the list
+# This script should be used with and Android Studio Project, inside 'res' folder
+# Renames folders in the list, adding the recevied string in the middle of the folder name.
+# for example: using 'night' as parameter, 'res/drawable-hdpi' will be 'res/drawable-night-hdpi'
 
 mv_bg_files(){
     
-    prefix="drawable-"
+    prefix="res/drawable-"
     newprefix="$1-"
     newdirs=(
         "ldpi"
